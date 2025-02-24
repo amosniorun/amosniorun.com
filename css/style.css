@@ -1,0 +1,78 @@
+@import url('https://fonts.cdnfonts.com/css/plantin-mt-pro');
+
+body {
+    margin: 0;
+    padding: 20px;
+    background-image: url('/images/Illustration.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+    color: #ABA597;
+    font-family: 'Plantin MT Pro', sans-serif;
+}
+
+h1 {
+    font-family: 'Plantin MT Pro', sans-serif;
+    font-size: 2rem;
+    font-weight: normal; /* Needed for safari */
+    color: #ABA597;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+p {
+    font-family: 'Plantin MT Pro', sans-serif;
+}
+
+.intro-container {
+    text-align: center;
+    background: rgba(13, 14, 13, 0.9);
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.quote-wrapper {
+    display: flex;
+    flex-wrap: wrap;           
+    justify-content: center;   
+    gap: 20px;                 
+    align-items: flex-start;
+}
+
+.quote-container {
+    flex: 1 1 300px;            
+    max-width: 500px;           
+    display: flex;
+    flex-direction: column;    
+    gap: 20px;                 
+    margin: 0 auto;
+    background: rgba(13, 14, 13, 0.9);
+    border-radius: 20px;
+}
+
+.message {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px;
+    color: #FEFCFD;
+}
+
+.portrait {
+    width: 6em;
+    height: auto;
+}
+
+.character-name {
+    font-family: 'Plantin MT Pro', sans-serif;
+    color: #ABA597;
+    text-align: center; 
+}
+
+.message-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
