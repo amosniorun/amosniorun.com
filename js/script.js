@@ -63,7 +63,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     linkIcon.addEventListener("click", function(e) {
       e.preventDefault();
-      history.replaceState(null, null, "#" + messageId);
+      let eventNum = messageId.split("-")[1];
+      history.replaceState(null, null, window.location.pathname + "?event=" + eventNum);
       navigator.clipboard.writeText(window.location.href).then(() => {
         // Debugging purposes
         console.log("Link copied to clipboard!");
@@ -81,20 +82,31 @@ document.addEventListener("DOMContentLoaded", function () {
     el.remove();
   });
 
-if (window.location.hash && window.location.hash.includes("event-")) {
-  let targetHash = window.location.hash;
-  history.replaceState(null, null, window.location.pathname + window.location.search);
-  
-  setTimeout(() => {
-    const target = document.querySelector(targetHash);
+  const params = new URLSearchParams(window.location.search);
+  const eventParam = params.get("event");
+  if (eventParam) {
+    const targetId = "event-" + eventParam;
+    const target = document.getElementById(targetId);
     if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-      target.classList.add("flash");
       setTimeout(() => {
-        target.classList.remove("flash");
-        history.replaceState(null, null, targetHash);
-      }, 2000);
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        target.classList.add("flash");
+        setTimeout(() => target.classList.remove("flash"), 2000);
+        
+        // Update meta tags dynamically
+        const metaTitle = document.querySelector('meta[property="og:title"]');
+        const metaDescription = document.querySelector('meta[property="og:description"]');
+        const metaImage = document.querySelector('meta[property="og:image"]');
+        if (metaTitle && metaDescription && metaImage) {
+          const charName = target.querySelector('.character-name').textContent;
+          const quoteP = target.querySelector('.message-content p');
+          const quoteText = quoteP ? quoteP.textContent : "";
+          const imgEl = target.querySelector('.portrait');
+          metaTitle.setAttribute("content", charName);
+          metaDescription.setAttribute("content", quoteText);
+          metaImage.setAttribute("content", imgEl ? imgEl.src : "");
+        }
+      }, 100);
     }
-  }, 100);
-}
+  }
 });
